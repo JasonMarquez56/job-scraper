@@ -1,0 +1,46 @@
+# ============================================================
+# LinkedIn Job Scraper Configuration
+# ============================================================
+
+searches:
+  - search_term: "Software Engineer"
+    location: "San Francisco, CA"
+    is_remote: false
+
+  - search_term: "Backend Engineer"
+    location: "Remote"
+    is_remote: true
+
+  - search_term: "Python Developer"
+    location: "New York, NY"
+    is_remote: false
+
+# Jobs must contain AT LEAST ONE of these in title or description
+required_keywords:
+  - "Python"
+  - "FastAPI"
+  - "Django"
+  - "Flask"
+
+# Jobs with ANY of these are discarded
+excluded_keywords:
+  - "Senior"
+  - "Staff"
+  - "Principal"
+  - "10+ years"
+  - "clearance"
+
+# Companies to exclude (case-insensitive partial match)
+excluded_companies:
+  - "DataAnnotations"
+
+max_age_days: 14
+results_per_search: 50
+
+discord:
+  webhook_url: "YOUR_DISCORD_WEBHOOK_URL_HERE"
+  jobs_per_message: 10
+
+db_path: "seen_jobs.db"
+log_file: "scraper.log"
+log_level: "INFO"
