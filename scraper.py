@@ -143,7 +143,7 @@ def build_embed(row: pd.Series) -> dict:
 		salary = f"${int(min_amount):,}+ /{interval}" if interval else f"${int(min_amount):,}+"
 	
 	# Description
-	desc = str(row.get("description", ""))
+	desc = str(row.get("description", "")).replace("\n", " ")
 	snippet = desc[:300].strip()
 	if len(desc) > 300:
 		snippet += "..."
