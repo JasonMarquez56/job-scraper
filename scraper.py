@@ -56,7 +56,7 @@ def init_db(db_path: str) -> sqlite3.Connection:
 	return conn
 
 def is_new_job(conn: sqlite3.Connection, job_url: str) -> bool:
-	row = conn.executed("SELECT 1 FROM seen_jobs WHERE job_url = ?", (job_url,)).fetchone()
+	row = conn.execute("SELECT 1 FROM seen_jobs WHERE job_url = ?", (job_url,)).fetchone()
 	return row is None
 
 def mark_seen(conn: sqlite3.Connection, job_url: str, title: str, company: str):
@@ -69,7 +69,7 @@ def mark_seen(conn: sqlite3.Connection, job_url: str, title: str, company: str):
 # Scraping
 
 def scrape(search: dict, results_wanted: int = 50) -> pd.DataFrame:
-	log.info(f"Scraping: '{search['search_term']}' @ ' {search['location']}'")
+	log.info(f"Scraping: '{search['search_term']}' @ '{search['location']}'")
 	try:
 		jobs = scrape_jobs(
 			site_name=["linkedin"],
@@ -167,7 +167,7 @@ def build_embed(row: pd.Series) -> dict:
 		"url": job_url,
 		"color": color,
 		"fields": fields,
-		"footer": {"text": "LinkedIn Job Alert • " + datetime.now().strftime("%Y=%m-%d")},
+		"footer": {"text": "LinkedIn Job Alert • " + datetime.now().strftime("%Y-%m-%d")},
 	}
 	return embed
 
