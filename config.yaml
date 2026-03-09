@@ -3,36 +3,88 @@
 # ============================================================
 
 searches:
-  - search_term: "Software Engineer"
-    location: "San Francisco, CA"
+  # --- Full Stack ---
+  - search_term: "Full Stack Engineer"
+    location: "Remote"
+    is_remote: true
+
+  - search_term: "Full Stack Developer"
+    location: "Los Angeles, CA"
     is_remote: false
 
+  # --- Frontend ---
+  - search_term: "Frontend Engineer"
+    location: "Remote"
+    is_remote: true
+
+  - search_term: "Frontend Developer"
+    location: "Los Angeles, CA"
+    is_remote: false
+
+  # --- Backend ---
   - search_term: "Backend Engineer"
     location: "Remote"
     is_remote: true
 
-  - search_term: "Python Developer"
-    location: "New York, NY"
+  - search_term: "Backend Developer"
+    location: "Los Angeles, CA"
+    is_remote: false
+
+  # --- Mobile ---
+  - search_term: "Android Developer"
+    location: "Remote"
+    is_remote: true
+
+  - search_term: "Flutter Developer"
+    location: "Remote"
+    is_remote: true
+
+  - search_term: "Mobile Engineer"
+    location: "Los Angeles, CA"
+    is_remote: false
+
+  # --- General / New Grad ---
+  - search_term: "Software Engineer New Grad"
+    location: "Remote"
+    is_remote: true
+
+  - search_term: "Junior Software Engineer"
+    location: "Los Angeles, CA"
     is_remote: false
 
 # Jobs must contain AT LEAST ONE of these in title or description
 required_keywords:
+  - "TypeScript"
+  - "JavaScript"
   - "Python"
-  - "FastAPI"
-  - "Django"
-  - "Flask"
+  - "Kotlin"
+  - "Dart"
+  - "React"
+  - "Next.js"
+  - "Flutter"
+  - "Android"
+  - "Firebase"
+  - "Node.js"
 
 # Jobs with ANY of these are discarded
 excluded_keywords:
   - "Senior"
   - "Staff"
   - "Principal"
+  - "Lead"
+  - "Manager"
   - "10+ years"
+  - "8+ years"
+  - "5+ years"
   - "clearance"
+  - "security clearance"
+  - "TS/SCI"
 
 # Companies to exclude (case-insensitive partial match)
 excluded_companies:
-  - "DataAnnotations"
+  - "DataAnnotation"
+  - "Outlier"
+  - "Appen"
 
 max_age_days: 14
 results_per_search: 50

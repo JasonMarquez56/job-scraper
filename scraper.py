@@ -69,7 +69,7 @@ def mark_seen(conn: sqlite3.Connection, job_url: str, title: str, company: str):
 # Scraping
 
 def scrape(search: dict, results_wanted: int = 50) -> pd.DataFrame:
-	log.info(f"Scraping: '{search['search_term']}' @ ' {search['location']}'")
+	log.info(f"Scraping: '{search['search_term']}' @ '{search['location']}'")
 	try:
 		jobs = scrape_jobs(
 			site_name=["linkedin"],
@@ -143,7 +143,7 @@ def build_embed(row: pd.Series) -> dict:
 		salary = f"${int(min_amount):,}+ /{interval}" if interval else f"${int(min_amount):,}+"
 	
 	# Description
-	desc = str(row.get("description", ""))
+	desc = str(row.get("description", "")).replace("\n", " ")
 	snippet = desc[:300].strip()
 	if len(desc) > 300:
 		snippet += "..."
@@ -167,7 +167,7 @@ def build_embed(row: pd.Series) -> dict:
 		"url": job_url,
 		"color": color,
 		"fields": fields,
-		"footer": {"text": "LinkedIn Job Alert • " + datetime.now().strftime("%Y=%m-%d")},
+		"footer": {"text": "LinkedIn Job Alert • " + datetime.now().strftime("%Y-%m-%d")},
 	}
 	return embed
 
