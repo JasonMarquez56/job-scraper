@@ -256,8 +256,16 @@ def run(config_path: str = "config.yaml"):
 	log.info("Done.")
 
 if __name__ == "__main__":
-	import argparse
+	import argparses
 	parser = argparse.ArgumentParser(description="LinkedIn Job Scraper")
 	parser.add_argument("--config", default="config.yaml", help="Path to config file")
+	parser.add_arguemnt("--reset", action="store_true", help="Clear the seen jobs database and exit")
 	args = parser.parse_args()
-	run(args.config)
+
+	if args.reset:
+		cfg = load_config(args.config)
+		db_path = cfg.get("db_path", "seen_jobs.db")
+		Path(db_path).unlink(missing_ok=True)
+		print(f"Cleared seen jobs database: {db_path}")
+	else:
+		run(args.config)
