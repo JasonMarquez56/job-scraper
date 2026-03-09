@@ -56,7 +56,7 @@ def init_db(db_path: str) -> sqlite3.Connection:
 	return conn
 
 def is_new_job(conn: sqlite3.Connection, job_url: str) -> bool:
-	row = conn.executed("SELECT 1 FROM seen_jobs WHERE job_url = ?", (job_url,)).fetchone()
+	row = conn.execute("SELECT 1 FROM seen_jobs WHERE job_url = ?", (job_url,)).fetchone()
 	return row is None
 
 def mark_seen(conn: sqlite3.Connection, job_url: str, title: str, company: str):
@@ -234,6 +234,12 @@ def run(config_path: str = "config.yaml"):
 		time.sleep(3)
 
 	log.info(f"Total new jobs to send: {len(all_new_jobs)}")
+
+	# Sort all new jobs by newest
+	all_new_jobs.sort(
+		key=lambda row: pd.to_datetime(row.get("date_posted"), errors="coerce") or pd.Timestamp.min,
+		reverse=True
+	)
 
 	if not all_new_jobs:
 		send_no_results_message(webhook_url)
